@@ -9,14 +9,16 @@ abstract class Data{
 class InputNilai extends Data{
 	private $data = '';
 	private $message = "Lanjutkan? [Y/n]:";
-	static  $proses;
+	protected $proses;
 
 	public function __construct($data = 'data.txt'){
 		$file = fopen($data,"a+") or die("Unable to open file!");
 		$this->data = $file;
+		
 	}
 
 	public function index(){
+		$this->proses = new InputNilai();
 		echo $this->input();
 		print $this->message;
 		echo $this->run();
@@ -31,7 +33,6 @@ class InputNilai extends Data{
 		echo "Nilai $nama adalah $nilai\n";
 		fwrite($this->data, $nilai . "\n");
 		fclose($this->data);
-		// return run();
 	}
 
 	
@@ -40,11 +41,9 @@ class InputNilai extends Data{
 		$confirmation  =  trim( fgets( STDIN ) );
 		$nt = trim("\n");
 		if ( $confirmation == 'Y' or $confirmation == 'y' or $confirmation == $nt ){
-				$proses = new InputNilai();
-				return $proses->index();
+				return $this->proses->index();
 			} else {
-				$hasil = new InputNilai();
-				echo $hasil->result();
+				echo $this->proses->result();
 			}
 	}
 
@@ -75,16 +74,13 @@ class InputNilai extends Data{
 			array_push($nilai, $getnum); //values
 			
 		}
-		// $hasil = implode($array);
-		// $keys =  ($array);
-		// $values = ($array1);
 
 		$c = array_combine($nama, $nilai);
 		ksort($c);
 		foreach ($c as $key => $value) {
 			echo "$key => $value\n";
 		}
-		echo "===> Nilai Lulus ⇐==\n";
+		echo "===> Nilai Lulus <===\n";
 		arsort($c);
 		function rank5($value){
 			return $value > 5;
@@ -95,7 +91,7 @@ class InputNilai extends Data{
 			echo "Nilai ujian $key telah mencukupi. Capaian ".($value*10)."%\n";
 		}
 
-		echo "===> Nilai Tidak Lulus ⇐==\n";
+		echo "===> Nilai Tidak Lulus <===\n";
 		asort($c);
 		function ranksd5($value){
 			return $value <= 5;
