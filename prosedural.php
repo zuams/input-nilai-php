@@ -53,9 +53,6 @@ function run(){
 			array_push($array1, $getnum); //values
 			
 		}
-		// $hasil = implode($array);
-		// $keys =  ($array);
-		// $values = ($array1);
 
 		$c = array_combine($array, $array1);
 		ksort($c);
@@ -103,11 +100,6 @@ function run(){
 		$bahasa = "PHP";
 		$namaku = "Sholeh Zuamsyah";
 		echo "Program dibuat dengan bahasa $bahasa oleh $namaku\n";
-		// print_r($c);
-
-		// print_r($lulus);
-		
-		// exit (0);
 	}
 }
 
